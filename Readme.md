@@ -13,7 +13,7 @@ This project is for creating two machines via Ansible for automation and configu
 
 ### How to 
 
-#### Machine A and B
+#### Machine A and B:
 
 __Storage__: I have choosed using a ubuntu/bionic64 minimal version (no GUI) for this exercise and confiured the iso file in the Virtual Box storage.
 ![Versao Linux](images/VersaoLinux.png)
@@ -37,7 +37,7 @@ sudo apt install net-tools openssh-server
   
 
 
-#### Machine M
+#### Machine M:
 
 __Installing the tools required Machine M:__
 ```
@@ -59,7 +59,7 @@ touch inventory
 touch vars.yml
 ```
 
-__Create and Encrypt variables using ansible-vault command:__
+__Encrypt variables using ansible-vault command:__
 ```
 ansible-vault encrypt vars.yml
 ```
@@ -72,12 +72,12 @@ __At the end test the connection to your database and wordpress site:__
  - Installing the tools required:
 ```
 sudo apt update
-sudo apt-get install telnet.
+sudo apt-get install telnet
 sudo apt install curl
 ```
  - Test
 ```
-telnet -e$ <mysql_machine_ip> 33306
+telnet -e$ <mysql_machine_ip> 3306
 ```
 - Check access to wordpress:
 ```
