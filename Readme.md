@@ -41,8 +41,9 @@ touch playbook.yml
 touch inventory
 ```
 
-Encrypt your variables using ansible-vault command:
+Create and Encrypt variables using ansible-vault command:
 ```
+touch vars.yml
 ansible-vault encrypt vars.yml
 ```
 Run ansible command:
