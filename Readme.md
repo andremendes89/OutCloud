@@ -12,6 +12,9 @@ This project is for creating two machines via Ansible for automation and configu
 - Having ansible openssh-server net-tools git installed on main machine (Machine M)
 
 ### How to 
+
+#### Machine A and B
+
 __Storage__: I have choosed using a ubuntu/bionic64 minimal version (no GUI) for this exercise and confiured the iso file in the Virtual Box storage.
 ![Versao Linux](images/VersaoLinux.png)
 ![Imagem Linux](images/ImagemLinux.png)
@@ -24,7 +27,7 @@ I have followed [VirtualBox PortForwarding](https://www.virtualbox.org/manual/ch
 __Installing the tools required:__
 ```
 sudo apt update
-sudo apt install net-tools 
+sudo apt install net-tools openssh-server
 ```
  - Test connection between both Machines
 
@@ -33,7 +36,10 @@ sudo apt install net-tools
   ![PingBtoA](images/pingBtoA.png)
   
 
-__Installing the tools required:__
+
+#### Machine M
+
+__Installing the tools required Machine M:__
 ```
 sudo apt update
 sudo apt install ansible net-tools git openssh-server 
@@ -44,8 +50,6 @@ __Create an ssh key pair for accessing the VM withouth the need for using passwo
 ssh-keygen -t rsa -b 2048 -C "Generating SSH keys for accessing VM"
 ssh-copy-id -i <home_dir>/.ssh/id_rsa.pub user@ip_host
 ```
-
-
 
 __Create project directory__
 ```
