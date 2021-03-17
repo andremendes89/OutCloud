@@ -39,11 +39,11 @@ Create project directory
 mkdir OutCloud
 touch playbook.yml
 touch inventory
+touch vars.yml
 ```
 
 Create and Encrypt variables using ansible-vault command:
 ```
-touch vars.yml
 ansible-vault encrypt vars.yml
 ```
 Run ansible command:
@@ -52,7 +52,13 @@ ansible-playbook playbook.yml -i inventory.ini --user=andre --extra-vars "ansibl
 ```
 
 At the end test the connection to your database and wordpress site:
-
+ - Installing the tools required:
+```
+sudo apt update
+sudo apt-get install telnet.
+sudo apt install curl
+```
+ - Test
 ```
 telnet -e$ <mysql_machine_ip> 33306
 ```
