@@ -100,8 +100,10 @@ __Wordpress Language Selection__
 ![Print_Wordpress](images/Wordpress.png)
 <br>
 <br>
-<br>
 _____________________________________________________________________________________________________________
 
-
+__Machine A Configuration__
+![MachineA](images/MaquinaA.png)
+__Machine B Configuration__
+![MachineB](images/MaquinaB.png)
 
