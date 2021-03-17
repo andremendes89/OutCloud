@@ -20,13 +20,13 @@ I need to set a port fowarding for accessing the VM from another bash console <b
 I have followed [VirtualBox PortForwarding](https://www.virtualbox.org/manual/ch06.html "VirtualBox Port Forwarding") to find out how to do it<br>
 
 
-Installing the tools required:
+__Installing the tools required:__
 ```
 sudo apt update
 sudo apt install ansible net-tools git openssh-server 
 ```
 
-Create an ssh key pair for accessing the VM withouth the need for using password
+__Create an ssh key pair for accessing the VM withouth the need for using password__
 ```
 ssh-keygen -t rsa -b 2048 -C "Generating SSH keys for accessing VM"
 ssh-copy-id -i <home_dir>/.ssh/id_rsa.pub user@ip_host
@@ -34,7 +34,7 @@ ssh-copy-id -i <home_dir>/.ssh/id_rsa.pub user@ip_host
 
 
 
-Create project directory
+__Create project directory__
 ```
 mkdir OutCloud
 touch playbook.yml
@@ -42,16 +42,16 @@ touch inventory
 touch vars.yml
 ```
 
-Create and Encrypt variables using ansible-vault command:
+__Create and Encrypt variables using ansible-vault command:__
 ```
 ansible-vault encrypt vars.yml
 ```
-Run ansible command:
+__Run ansible command:__
 ```
 ansible-playbook playbook.yml -i inventory.ini --user=andre --extra-vars "ansible_sudo_pass=" --ask-vault-password
 ```
 
-At the end test the connection to your database and wordpress site:
+__At the end test the connection to your database and wordpress site:__
  - Installing the tools required:
 ```
 sudo apt update
@@ -62,7 +62,7 @@ sudo apt install curl
 ```
 telnet -e$ <mysql_machine_ip> 33306
 ```
-Check access to wordpress:
+- Check access to wordpress:
 ```
 curl -v http://<ip_wordpress_machine> 
 ```
