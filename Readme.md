@@ -87,4 +87,7 @@ curl -v http://<ip_wordpress_machine>
 ```
 ![Curl Wordpress](images/curlwordpress.png)
 
+__Confirm Wordpress Running on Machine A__:
+![Print_Wordpress](images/Wordpress.png)
+
 
