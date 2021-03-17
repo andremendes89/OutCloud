@@ -34,7 +34,7 @@ ssh-copy-id -i <home_dir>/.ssh/id_rsa.pub user@ip_host
 
 
 
-Create your project directory
+Create project directory
 ```
 mkdir OutCloud
 touch playbook.yml
@@ -48,10 +48,6 @@ ansible-vault encrypt vars.yml
 Run ansible command:
 ```
 ansible-playbook playbook.yml -i inventory.ini --user=andre --extra-vars "ansible_sudo_pass=" --ask-vault-password
-```
-Get the Machines up with
-```
-sudo vagrant up --provision
 ```
 
 At the end test the connection to your database and wordpress site:
