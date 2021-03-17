@@ -13,6 +13,8 @@ This project is for creating two machines via Ansible for automation and configu
 
 ### How to 
 __Storage__: I have choosed using a ubuntu/bionic64 minimal version (no GUI) for this exercise and confiured the iso file in the Virtual Box storage.
+![ubuntu version](images/VersaoLinux.png)
+![ubuntu storage](images/ImagemLinux.png)
 
 
 __Networking:__ Fot Machine A and Machine B be able to talk to each other and for security reasons I have choosed NAT network since it acts like our home network with a wireless router. I have created NAT Network "Rede" and changed IP of Machine M to 192.168.100.6 Machine B to 192.168.100.7 and Machine A to 192.168.100.8.<br>
