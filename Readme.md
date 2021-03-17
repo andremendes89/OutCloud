@@ -21,16 +21,15 @@ __Networking:__ Fot Machine A and Machine B be able to talk to each other and fo
 I have followed [VirtualBox PortForwarding](https://www.virtualbox.org/manual/ch06.html "VirtualBox Port Forwarding") to find out how to do it<br>
 ![Port Forwarding](images/portfowarding.png)
 
-
-
- - __Test connection between both Machines__
-
-Installing the tools required:
+__Installing the tools required:__
 ```
 sudo apt update
 sudo apt install net-tools 
 ```
+ - Test connection between both Machines
+
   ![PingAtoB](images/pingAtoB.png)
+  
   ![PingBtoA](images/pingBtoA.png)
   
 
