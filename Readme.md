@@ -19,11 +19,11 @@ __Storage__: I have choosed using a ubuntu/bionic64 minimal version (no GUI) for
 
 __Networking:__ Fot Machine A and Machine B be able to talk to each other and for security reasons I have choosed NAT network since it acts like our home network with a wireless router. I have created NAT Network "Rede" and set a port fowarding for accessing the VM from another bash console <br>
 I have followed [VirtualBox PortForwarding](https://www.virtualbox.org/manual/ch06.html "VirtualBox Port Forwarding") to find out how to do it<br>
-![PortFowarding]
 ![Port Forwarding](images/portfowarding.png)
+
  - Test connection between both Machines
- - ![PingAtoB](images/pingAtoB.png)
- - ![PingBtoA](images/pingBtoA.png)
+  ![PingAtoB](images/pingAtoB.png)
+  ![PingBtoA](images/pingBtoA.png)
   
 
 __Installing the tools required:__
