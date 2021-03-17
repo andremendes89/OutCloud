@@ -16,6 +16,7 @@ This project is for creating two machines via Ansible for automation and configu
 #### Machine A and B:
 
 __Storage__: I have choosed using a ubuntu/bionic64 minimal version (no GUI) for this exercise and confiured the iso file in the Virtual Box storage.
+<br>
 ![Versao Linux](images/VersaoLinux.png)
 ![Imagem Linux](images/ImagemLinux.png)
 
