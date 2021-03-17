@@ -1,0 +1,12 @@
+A_Wordpress  ansible_ssh_host=192.168.100.8 
+B_MySQL  ansible_ssh_host=192.168.100.7 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[machines:children]
+mysql
+wordpress
+
+[wordpress]
+A_Wordpress
+
+[mysql]
+B_MySQL

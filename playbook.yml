@@ -1,0 +1,206 @@
+- name: Install database server on B_MySQL
+  hosts: mysql
+  remote_user: b
+#  become: yes           # enable root privileges
+  gather_facts: yes
+  handlers:
+  - include: handlers/handlers.yml
+  vars_files:
+  - vars/vars.yml
+  
+  tasks:
+  - debug: msg="hostname={{ansible_hostname}} OS_description={{ansible_distribution_release}}"
+    when: ansible_os_family=="Debian"
+
+  - name: Install MySQL on B_MySQL
+    become_method: sudo
+    register: mysql_installation
+    notify: Start Mysql
+    apt:
+      name: "{{ item }}"
+      state: present
+    with_items:
+     - mysql-server
+     - mysql-client
+     - python3-pip
+     - python3-mysqldb
+
+  - debug: var=mysql_installation
+  
+  - name: Ensure mysql is running
+    ansible.builtin.service:
+      name: mysql
+      state: started
+      enabled: yes
+  
+  - name: Install PyMySQL
+    pip:
+      name: PyMySQL
+    register: pymysql_installation
+
+  - name: Update database root password
+    mysql_user:
+      login_unix_socket: /var/run/mysqld/mysqld.sock  
+      login_user: 'root'
+      login_password: ''
+      check_implicit_admin: yes
+      name: root
+      password: '{{ mysql_root_password }}'
+      state: present
+    when: mysql_installation is changed
+    run_once: true
+      
+  - name: Allow remote connections from other machines
+    replace:
+      dest: "{{ mysql_cnf_configuration_file }}"
+      regexp: '^bind-address(.*)'
+      replace: 'bind-address = {{ mysql_bind_address }}'
+    notify:
+      - Restart Mysql
+
+  - name: Delete anonymous database user
+    mysql_user:
+      user: ''
+      login_user: 'root'
+      login_password: '{{ mysql_root_password }}'
+      login_unix_socket: /var/run/mysqld/mysqld.sock  
+      state: 'absent'
+
+  - name: Remove test database on first install
+    mysql_db:
+      login_user: 'root'
+      login_password: '{{ mysql_root_password }}'
+      login_unix_socket: /var/run/mysqld/mysqld.sock  
+      db: 'test'
+      state: 'absent'
+  
+  - name: Create database
+    mysql_db: 
+      login_user: 'root'
+      login_password: '{{ mysql_root_password }}'
+      login_unix_socket: /var/run/mysqld/mysqld.sock  
+      name: '{{ mysql_name }}' 
+      state: present
+  
+  - name: Create user
+    mysql_user:
+      login_user: 'root'
+      login_password: '{{ mysql_root_password }}'
+      login_unix_socket: /var/run/mysqld/mysqld.sock  
+      name: '{{ mysqldb_user }}'
+      host: '%'
+      password: '{{ mysql_password }}'
+      priv: '{{ mysql_name }}.*:ALL'
+      state: present
+      
+- name: Install Wordpress on A_Wordpress
+  hosts: wordpress
+  remote_user: a
+  gather_facts: yes
+  become: yes
+  handlers:
+  - include: handlers/handlers.yml
+  vars_files:
+  - vars.yml
+
+  tasks:
+  - debug: msg="hostname={{ansible_hostname}} OS_description={{ansible_distribution_release}}"
+    when: ansible_os_family=="Debian"
+
+  - name: Install prerequisites
+    apt: 
+      name: "{{ item }}" 
+      update_cache: yes 
+      state: latest 
+      force_apt_get: yes
+    with_items:
+     - aptitude
+
+  - name: Install Apache
+    apt: name=apache2 update_cache=yes state=latest
+
+  - name: Install PHP Extensions
+    apt: name={{ item }} update_cache=yes state=latest
+    loop: "{{ php_modules }}"
+
+  - name: "UFW - Allow HTTP on port {{ http_port }}"
+    become: yes
+    ufw:
+      rule: allow
+      port: "{{ http_port }}"
+      proto: tcp
+      
+  - name: Create a directory if it does not exist
+    ansible.builtin.file:
+      path: "/var/www/{{ ansible_hostname }}"
+      state: directory
+      mode: '0755'
+        
+#  - name: Download and unpack Latest Wordpress version
+#    become: yes
+#    unarchive: 
+#      #src: /tmp/wordpress.tar.gz 
+#      src: https://wordpress.org/latest.tar.gz
+#      dest: "/var/www/{{ ansible_hostname }}" 
+#      remote_src: yes
+#      creates: "/var/www/{{ ansible_hostname }}/wordpress"
+    
+  - name: Download Required Files
+    get_url:
+      url: "https://wordpress.org/latest.tar.gz"
+      dest: "/tmp/wordpress.tar.gz"
+      timeout: 60
+      validate_certs: no
+      
+  - name: Extract Wordpress
+    become: yes  
+    unarchive: 
+      #src: /tmp/wordpress.tar.gz 
+      src: /tmp/wordpress.tar.gz
+      dest: "/var/www/{{ ansible_hostname }}" 
+      remote_src: yes
+      creates: "/var/www/{{ ansible_hostname }}/wordpress"
+  
+  - name: Update default Apache site
+    become: yes
+    lineinfile:
+      dest=/etc/apache2/sites-enabled/000-default.conf
+      regexp="(.)+DocumentRoot /var/www/html"
+      line="DocumentRoot /var/www/{{ ansible_hostname }}/wordpress/"
+    notify:
+      - Restart Apache
+  
+  - name: Copy sample config file
+    become: yes
+    command: mv "/var/www/{{ ansible_hostname }}/wordpress/wp-config-sample.php" "/var/www/{{ ansible_hostname }}/wordpress/wp-config.php" creates="/var/www/{{ ansible_hostname }}/wordpress/wp-config.php"
+  
+  - name: Update WordPress config file
+    become: yes
+    lineinfile:
+      dest="/var/www/{{ ansible_hostname }}/wordpress/wp-config.php"
+      regexp="{{ item.regexp }}"
+      line="{{ item.line }}"
+    with_items:
+      - {'regexp': "define\\( 'DB_NAME', '(.)+' \\);", 'line': "define( 'DB_NAME', '{{ mysql_name }}');"}
+      - {'regexp': "define\\( 'DB_USER', '(.)+' \\);", 'line': "define( 'DB_USER', '{{ mysqldb_user }}');"}
+      - {'regexp': "define\\( 'DB_PASSWORD', '(.)+' \\);", 'line': "define( 'DB_PASSWORD', '{{ mysql_password }}');"}
+      - {'regexp': "define\\( 'DB_HOST', '(.)+' \\);", 'line': "define( 'DB_HOST', '{{ mysql_ip }}');"}
+
+  - name: Update ownership to Apache user
+    become: yes
+    file:
+      path: "/var/www/{{ ansible_hostname }}/wordpress/"
+      state: directory
+      recurse: yes
+      owner: www-data
+      group: www-data
+
+  - name: Set the correct permissions on Wordpress directories
+    become: yes
+    command: find "/var/www/{{ ansible_hostname }}/wordpress/" -type d -exec chmod 750 {} \;
+
+  - name: Set the correct permissions for Wordpress files
+    become: yes
+    command: find "/var/www/{{ ansible_hostname }}/wordpress/" -type f -exec chmod 640 {} \;
+    notify:
+      - Restart Apache
