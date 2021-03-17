@@ -65,7 +65,7 @@ ansible-vault encrypt vars.yml
 ```
 __Run ansible command:__
 ```
-ansible-playbook playbook.yml -i inventory.ini --user=andre --extra-vars "ansible_sudo_pass=" --ask-vault-pass
+ansible-playbook playbook.yml -i inventory --user=a --extra-vars "ansible_sudo_pass=" --ask-vault-pass
 ```
 
 __At the end test the connection to your database and wordpress site:__
