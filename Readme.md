@@ -65,7 +65,7 @@ ansible-vault encrypt vars.yml
 ```
 __Run ansible command:__
 ```
-ansible-playbook playbook.yml -i inventory --user=a --extra-vars "ansible_sudo_pass=" --ask-vault-pass
+ansible-playbook playbook.yml -i inventory --user= --extra-vars "ansible_sudo_pass=" --ask-vault-pass
 ```
 
 __At the end test the connection to your database and wordpress site:__
@@ -75,7 +75,7 @@ sudo apt update
 sudo apt-get install telnet
 sudo apt install curl
 ```
- - Test
+ - Test MySQL Connection
 ```
 telnet -e$ <mysql_machine_ip> 3306
 ```
