@@ -1,0 +1,17 @@
+
+## Variables MYSQL
+mysql_root_password: "@dmin12#"
+mysql_password: "P@ssw0rd"
+mysqldb_user: "mysql"
+mysql_bind_address: 0.0.0.0
+mysql_name: "mysql"
+mysql_cnf_configuration_file: /etc/mysql/mysql.conf.d/mysqld.cnf
+mysql_ip: 192.168.100.7
+
+
+## Variables APACHE/Wordpress
+php_modules: [ 'php-curl', 'php-gd', 'php-mbstring', 'php-xml', 'php-xmlrpc', 'php-soap', 'php-intl', 'php-zip', 'php-mysql', 'libapache2-mod-php']
+http_conf: "ubuntu-b.conf"
+http_port: "80"
+disable_default: true
+wordpress_ip: 192.168.100.8

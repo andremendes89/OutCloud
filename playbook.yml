@@ -6,7 +6,7 @@
   handlers:
   - include: handlers/handlers.yml
   vars_files:
-  - vars/vars.yml
+  - vars.yml
   
   tasks:
   - debug: msg="hostname={{ansible_hostname}} OS_description={{ansible_distribution_release}}"
