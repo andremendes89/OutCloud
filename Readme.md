@@ -6,13 +6,14 @@ This project is for creating two machines via Ansible for automation and configu
 
 ### Pre-Requisites
 
-- Having Linux (no GUI) installed on both machines.
-    - Having openssh-server net-tools installed on Machine A and Machine B.
+- Having Linux (no GUI) installed on Machine A and Machine B.
+    - Having openssh-server net-tools installed on both machines.
 
 - Having ansible openssh-server net-tools git installed on main machine (Machine M)
 
 ### How to 
-I am using a ubuntu/bionic64 minimal version (no GUI) for this exercise<br>
+Storage: I have choosed using a ubuntu/bionic64 minimal version (no GUI) for this exercise and confiured the iso file in the Virtual Box storageI am using a ubuntu/bionic64 minimal version (no GUI) for this exercise
+<br>
 In case you are using NAT network on the host you need to set a port forwarding for accessing the VM from another bash console <br>
 Go to [VirtualBox PortForwarding](https://www.virtualbox.org/manual/ch06.html "VirtualBox Port Forwarding") to find out how to do it<br>
 
