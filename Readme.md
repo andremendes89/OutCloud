@@ -79,8 +79,15 @@ sudo apt install curl
 ```
 telnet -e$ <mysql_machine_ip> 3306
 ```
+![Telnet MySQL](images/telnetmysql.png)
+
 - Check access to wordpress:
 ```
 curl -v http://<ip_wordpress_machine> 
 ```
+![Curl Wordpress](images/curlwordpress.png)
+
+__Confirm Wordpress Running on Machine A__:
+![Print_Wordpress](images/Wordpress.png)
+
 
