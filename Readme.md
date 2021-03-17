@@ -1,11 +1,15 @@
-# Ansible Project
+# OutCloud Project
 
-This project is for creating two machines using vagrant and then Ansible for automation and configuration
+This project is for creating two machines via Ansible for automation and configuration:
+ - Machine A with Wordpress 
+ - Machine B with MySQL 
 
 ### Pre-Requisites
 
-- Having ansible openssh-server net-tools git vagrant virtualbox and telnet/curl installed on main machine
-- Having openssh-server installed on the secondary machine
+- Having Linux (no GUI) installed on both machines.
+    - Having openssh-server net-tools installed on Machine A and Machine B.
+
+- Having ansible openssh-server net-tools git installed on main machine (Machine M)
 
 ### How to 
 I am using a ubuntu/bionic64 minimal version (no GUI) for this exercise<br>
