@@ -96,6 +96,7 @@ To Screenshot Wordpress Interface at Language Selection I needed to portfowardin
 
 __Wordpress Language Selection__
 <br>
+<br>
 ![Print_Wordpress](images/Wordpress.png)
 
 
