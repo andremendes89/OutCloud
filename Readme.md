@@ -105,7 +105,9 @@ ________________________________________________________________________________
 
 ## Machines Info
 __Machine A Configuration__
+
 ![MachineA](images/MaquinaA.png)
+<br>
 <br>
 __Machine B Configuration__
 ![MachineB](images/MaquinaB.png)
