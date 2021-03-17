@@ -110,4 +110,3 @@ __Machine A Configuration__
 <br>
 __Machine B Configuration__
 ![MachineB](images/MaquinaB.png)
-
