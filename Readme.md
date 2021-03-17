@@ -101,9 +101,13 @@ __Wordpress Language Selection__
 <br>
 <br>
 _____________________________________________________________________________________________________________
+_____________________________________________________________________________________________________________
 
+## Machines Info
+<br>
 __Machine A Configuration__
 ![MachineA](images/MaquinaA.png)
+<br>
 __Machine B Configuration__
 ![MachineB](images/MaquinaB.png)
 
