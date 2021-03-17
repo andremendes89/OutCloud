@@ -94,7 +94,8 @@ To Screenshot Wordpress Interface at Language Selection I needed to portfowardin
 ![Wordpress8080](images/wordpress8080.png)
 <br>
 
-Wordpress Language Selection 
+__Wordpress Language Selection__
+<br>
 ![Print_Wordpress](images/Wordpress.png)
 
 
