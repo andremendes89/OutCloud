@@ -88,6 +88,10 @@ curl -v http://<ip_wordpress_machine>
 ![Curl Wordpress](images/curlwordpress.png)
 
 __Confirm Wordpress Running on Machine A__:
+To Screenshot Wordpress Interface at Language Selection I needed to portfowarding Machine A to port 8080 
+![Wordpress8080](images/wordpress8080.png)
+
+Wordpress Language Selection 
 ![Print_Wordpress](images/Wordpress.png)
 
 
