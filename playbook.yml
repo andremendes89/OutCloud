@@ -1,7 +1,7 @@
 - name: Install database server on B_MySQL
   hosts: mysql
   remote_user: b
-#  become: yes           # enable root privileges
+  become: yes           # enable root privileges
   gather_facts: yes
   handlers:
   - include: handlers/handlers.yml
